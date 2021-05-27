@@ -1,0 +1,50 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.2",
+        "@types/react-datepicker": "^3.1.8",
+        "@types/react-dom": "^17.0.1",
+        "@types/react-helmet": "^6.1.0",
+        "@types/ziggy-js": "^1.0.0",
+        "@typescript-eslint/eslint-plugin": "^4.15.2",
+        "@typescript-eslint/parser": "^4.15.2",
+        "axios": "^0.21",
+        "eslint": "^7.20.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "prettier": "^2.2.1",
+        "ts-loader": "^8.0.17",
+        "typescript": "^4.2.2"
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.8.5",
+        "@inertiajs/inertia-react": "^0.5.4",
+        "@inertiajs/progress": "^0.2.4",
+        "@tabler/core": "^1.0.0-beta2",
+        "@types/classnames": "^2.3.1",
+        "classnames": "^2.3.1",
+        "date-fns": "^2.21.3",
+        "prettier-plugin-organize-imports": "^2.0.0",
+        "react": "^17.0.1",
+        "react-datepicker": "^3.8.0",
+        "react-dom": "^17.0.1",
+        "react-helmet": "^6.1.0",
+        "react-use": "^17.2.4",
+        "ziggy-js": "^1.0.5"
+    }
+}
