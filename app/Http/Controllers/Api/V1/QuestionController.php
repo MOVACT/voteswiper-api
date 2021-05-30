@@ -15,25 +15,32 @@ class QuestionController extends Controller
      *
      * Fetches questions for a specific election
      *
-     * @Get("/questions")
+     * @Post("/questions")
      * @Versions({"v1"})
-     * @Request({"election": "state-election-saxony-anhalt-2021"}, headers={"Content-Language": "en"})
+     * @Request({"slug": "state-election-saxony-anhalt-2021"}, headers={"Content-Language": "en"})
+     * @Request({"id": 21, headers={"Content-Language": "en"})
      */
     public function index(Request $request)
     {
-        if (!isset($request->input()["election"])) {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug was provided.');
+        if (!$request->input('slug') && !$request->input('id')) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug or id was provided.');
         }
 
         $currentLocale = App::getLocale();
-        $slug = $request->input()["election"];
+        $value = $request->input('id') ?? $request->input('slug');
 
-        $cacheKey = $currentLocale . '_questions_' . $slug;
+        $cacheKey = $currentLocale . '_questions_' . $value;
 
         if (!Cache::has($cacheKey)) {
-            $election = Election::where(function($query) use($slug, $currentLocale) {
-                $query->where('slug->' . $currentLocale, $slug)->orWhere('slug->en', $slug);
-            })->where('published', true)->where('playable', true)->firstOrFail();
+            if ($request->input('id')) {
+                $election = Election::where('id', $request->input('id'));
+            } else {
+                $election = Election::where(function($query) use($request, $currentLocale) {
+                    $query->where('slug->' . $currentLocale, $request->input('slug'))->orWhere('slug->en', $request->input('slug'));
+                });
+            }
+
+            $election = $election->where('published', true)->where('playable', true)->firstOrFail();
 
             Cache::put($cacheKey, $election->questions()->ordered()->with('thumbnail')->get(), now()->addMinutes(120));
         }

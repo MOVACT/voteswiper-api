@@ -19,15 +19,15 @@ use App\Http\Controllers\Api\V1\QuestionController;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
-    $api->get('countries', [CountryController::class, 'index']);
-    $api->get('alternateCountrySlugs', [CountryController::class, 'alternateCountrySlugs']);
-    $api->get('countryBySlug', [CountryController::class, 'countryBySlug']);
+    $api->post('countries', [CountryController::class, 'index']);
+    $api->post('alternateCountrySlugs', [CountryController::class, 'alternateCountrySlugs']);
+    $api->post('countryBySlug', [CountryController::class, 'countryBySlug']);
 
-    $api->get('elections', [ElectionController::class, 'index']);
-    $api->get('electionBySlug', [ElectionController::class, 'electionBySlug']);
-    $api->get('alternateElectionSlugs', [ElectionController::class, 'alternateElectionSlugs']);
+    $api->post('elections', [ElectionController::class, 'index']);
+    $api->post('election', [ElectionController::class, 'election']);
+    $api->post('alternateElectionSlugs', [ElectionController::class, 'alternateElectionSlugs']);
 
-    $api->get('parties', [PartyController::class, 'index']);
+    $api->post('parties', [PartyController::class, 'index']);
 
-    $api->get('questions', [QuestionController::class, 'index']);
+    $api->post('questions', [QuestionController::class, 'index']);
 });

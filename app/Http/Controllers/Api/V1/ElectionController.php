@@ -17,7 +17,7 @@ class ElectionController extends Controller
      *
      * Fetches elections for a specific country
      *
-     * @Get("/elections")
+     * @Post("/elections")
      * @Versions({"v1"})
      * @Request({"country": "germany", "include": "all"}, headers={"Content-Language": "en"})
      */
@@ -34,14 +34,18 @@ class ElectionController extends Controller
         }
 
         $currentLocale = App::getLocale();
-        $slug = $request->input()["country"];
+        $paramCountry = $request->input()["country"];
 
-        $cacheKey = $currentLocale . '_elections_' . $include . '_' . $slug;
+        $cacheKey = $currentLocale . '_elections_' . $include . '_' . $paramCountry;
 
         if (!Cache::has($cacheKey)) {
-            $country = Country::where(function($query) use($slug, $currentLocale) {
-                $query->where('slug->' . $currentLocale, $slug)->orWhere('slug->en', $slug);
-            })->where('published', true)->firstOrFail();
+            if (is_numeric($paramCountry)) {
+                $country = Country::where('id', $paramCountry)->where('published', true)->firstOrFail();
+            } else {
+                $country = Country::where(function($query) use($paramCountry, $currentLocale) {
+                    $query->where('slug->' . $currentLocale, $paramCountry)->orWhere('slug->en', $paramCountry);
+                })->where('published', true)->firstOrFail();
+            }
 
             $elections = $country
                 ->elections()
@@ -68,27 +72,32 @@ class ElectionController extends Controller
     /**
      * Get election
      *
-     * Fetches election by slug
+     * Fetches election by slug or ID
      *
-     * @Get("/electionBySlug")
+     * @Post("/election")
      * @Versions({"v1"})
      * @Request({"slug": "state-election-saxony-anhalt-2021"}, headers={"Content-Language": "en"})
+     * @Request({"id": 21, headers={"Content-Language": "en"})
      */
-    public function electionBySlug(Request $request)
+    public function election(Request $request)
     {
-        if (!isset($request->input()["slug"])) {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug was provided.');
+        if (!$request->input('slug') && !$request->input('id')) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election was provided.');
         }
 
         $currentLocale = App::getLocale();
-        $slug = $request->input()["slug"];
+        $value = $request->input('id') ?? $request->input('slug');
 
-        $cacheKey = $currentLocale . '_election_' . '_' . $slug . time();
+        $cacheKey = $currentLocale . '_election_' . '_' . $value;
 
         if (!Cache::has($cacheKey)) {
-            $election = Election::where(function($query) use($slug, $currentLocale) {
-                $query->where('slug->' . $currentLocale, $slug)->orWhere('slug->en', $slug);
-            })->where('published', true)->with('card')->firstOrFail();
+            if ($request->input('id')) {
+                $election = Election::where('id', $request->input('id'))->where('published', true)->with('card')->firstOrFail();
+            } else {
+                $election = Election::where(function($query) use($request, $currentLocale) {
+                    $query->where('slug->' . $currentLocale, $request->input('slug'))->orWhere('slug->en', $request->input('slug'));
+                })->where('published', true)->with('card')->firstOrFail();
+            }
 
             Cache::put($cacheKey, $election, now()->addMinutes(120));
         }
@@ -101,7 +110,7 @@ class ElectionController extends Controller
      *
      * Fetches "alternate" links used in hreflang meta tags based on the current slug
      *
-     * @Get("/alternateElectionSlugs")
+     * @Post("/alternateElectionSlugs")
      * @Versions({"v1"})
      * @Request({"slug": "landtagswahl-sachsen-anhalt-2021"}, headers={"Content-Language": "en"})
      */

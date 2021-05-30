@@ -17,27 +17,34 @@ class PartyController extends Controller
      *
      * Fetches parties for a specific election
      *
-     * @Get("/parties")
+     * @Post("/parties")
      * @Versions({"v1"})
-     * @Request({"election": "state-election-saxony-anhalt-2021"}, headers={"Content-Language": "en"})
+     * @Request({"slug": "state-election-saxony-anhalt-2021"}, headers={"Content-Language": "en"})
+     * @Request({"id": 23}, headers={"Content-Language": "en"})
      */
     public function index(Request $request)
     {
-        if (!isset($request->input()["election"])) {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug was provided.');
+        if (!$request->input('slug') && !$request->input('id')) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug or id was provided.');
         }
 
         $currentLocale = App::getLocale();
-        $slug = $request->input()["election"];
+        $value = $request->input('id') ?? $request->input('slug');
 
-        $cacheKey = $currentLocale . '_parties_' . $slug;
+        $cacheKey = $currentLocale . '_parties_' . $value;
 
         if (!Cache::has($cacheKey)) {
-            $election = Election::where(function($query) use($slug, $currentLocale) {
-                $query->where('slug->' . $currentLocale, $slug)->orWhere('slug->en', $slug);
-            })->where('published', true)->with('card')->firstOrFail();
+            if ($request->input('id')) {
+                $election = Election::where('id', $request->input('id'));
+            } else {
+                $election = Election::where(function($query) use($request, $currentLocale) {
+                    $query->where('slug->' . $currentLocale, $request->input('slug'))->orWhere('slug->en', $request->input('slug'));
+                });
+            }
 
-            $parties = $election->parties()->where('published', true)->with('logo')->orderBy('name')->get();
+            $election = $election->where('published', true)->with('card')->firstOrFail();
+
+            $parties = $election->parties()->where('playable', true)->where('published', true)->with('logo')->orderBy('name')->get();
 
             $list = [];
 
