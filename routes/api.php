@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\CountryController;
 use App\Http\Controllers\Api\V1\ElectionController;
 use App\Http\Controllers\Api\V1\PartyController;
 use App\Http\Controllers\Api\V1\QuestionController;
+use App\Http\Controllers\Api\V1\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,8 @@ $api->version('v1', function ($api) {
     $api->post('parties', [PartyController::class, 'index']);
 
     $api->post('questions', [QuestionController::class, 'index']);
+
+    $api->post('/statistics/countAnswer', [StatisticController::class, 'countAnswer']);
+    $api->post('/statistics/initiate', [StatisticController::class, 'initiate']);
+    $api->post('/statistics/saveResult', [StatisticController::class, 'saveResult']);
 });
