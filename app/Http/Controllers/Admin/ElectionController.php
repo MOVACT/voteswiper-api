@@ -110,8 +110,6 @@ class ElectionController extends Controller
             $data['card_upload_id'] = $image->id;
         }
 
-        var_dump($data);
-
         $election->update($data);
 
         return redirect()
