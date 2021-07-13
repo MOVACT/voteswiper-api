@@ -1,6 +1,12 @@
 import { Page } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { IconFlag2, IconListCheck, IconMap, IconUsers } from '@tabler/icons';
+import {
+    IconDatabaseOff,
+    IconFlag2,
+    IconListCheck,
+    IconMap,
+    IconUsers,
+} from '@tabler/icons';
 import cn from 'classnames';
 import React from 'react';
 import route from 'ziggy-js';
@@ -140,6 +146,20 @@ export const Layout: React.FC = ({ children }) => {
                                         </span>
                                         <span className="nav-link-title">
                                             Users
+                                        </span>
+                                    </InertiaLink>
+                                </li>
+
+                                <li className={cn('nav-item')}>
+                                    <InertiaLink
+                                        href={route('admin.cache')}
+                                        className="nav-link"
+                                    >
+                                        <span className="nav-link-icon d-md-none d-lg-inline-block">
+                                            <IconDatabaseOff size={24} />
+                                        </span>
+                                        <span className="nav-link-title">
+                                            Clear cache
                                         </span>
                                     </InertiaLink>
                                 </li>

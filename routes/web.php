@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CacheController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ElectionController;
 use App\Http\Controllers\Admin\ElectionPartyController;
 use App\Http\Controllers\Admin\ElectionQuestionController;
-use App\Http\Controllers\Admin\MigrationController;
 use App\Http\Controllers\Admin\PartyController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Request;
@@ -29,6 +29,8 @@ Route::name('admin.')->middleware(["web", "auth"])->group(function () {
         session()->put('locale', $key);
         return isset(Request::query()['redirect']) ? redirect(Request::query()['redirect']) : redirect()->back();
     })->name('locale');
+
+    Route::get('/cache', [CacheController::class, 'index'])->name('cache');
 
     /**
      * User Management
