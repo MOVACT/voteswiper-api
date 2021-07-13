@@ -23,7 +23,7 @@ interface Props extends GlobalProps {
 const ElectionCreateOrEdit: InertiaPage = () => {
     const { props } = usePage<PageType<Props>>();
 
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         country_id: props.election ? props.election.country_id : '',
         name: props.election ? props.election.name : '',
         published: props.election ? props.election.published : false,
@@ -41,10 +41,10 @@ const ElectionCreateOrEdit: InertiaPage = () => {
         e.preventDefault();
 
         if (props.election) {
-            put(
-                route('admin.elections.update', {
+            post(
+                `${route('admin.elections.update', {
                     election: props.election.id,
-                }),
+                })}?_method=PUT`,
                 data
             );
             return;

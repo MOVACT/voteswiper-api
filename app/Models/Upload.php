@@ -8,6 +8,7 @@ use App\Traits\HasTranslations;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use LogicException;
@@ -72,14 +73,25 @@ class Upload extends Model
      * @throws BindingResolutionException
      * @throws Throwable
      */
-    public static function add(UploadedFile $file, string $pathPrefix = '') {
+    public static function add(UploadedFile $file, string $pathPrefix = '', int | null $assetId = null) {
+        if (!$assetId) {
+            $preseveLocal = App::getLocale();
+
+            App::setLocale('en');
+        }
+
         $uploadedFileName = $file->getClientOriginalName();
 
         $path = (!empty($pathPrefix) ? $pathPrefix . '/' : '') . uniqid();
 
         $filename = pathinfo($uploadedFileName, PATHINFO_FILENAME);
         $extension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);
-        $upload = new self;
+
+        if ($assetId) {
+            $upload = self::find($assetId);
+        } else {
+            $upload = new self;
+        }
 
         $safeFilename = Str::slug($filename) . '-' . Str::random(5) . '.' . $extension;
         $storedFilename = $path . '/' . $safeFilename;
@@ -97,6 +109,10 @@ class Upload extends Model
         $file->storePubliclyAs($path, $safeFilename);
 
         $upload->saveOrFail();
+
+        if (!$assetId) {
+            App::setLocale($preseveLocal);
+        }
 
         return $upload;
     }

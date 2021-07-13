@@ -106,8 +106,8 @@ class ElectionController extends Controller
         $data = $request->input();
 
         if ($request->file('card')) {
-            $image = Upload::add($request->file('card'), 'elections');
-            $data['card_upload_id'] = $image->id;
+            $image = Upload::add($request->file('card'), 'elections', $election->card_upload_id ?? null);
+            // $data['card_upload_id'] = $image->id;
         }
 
         $election->update($data);
