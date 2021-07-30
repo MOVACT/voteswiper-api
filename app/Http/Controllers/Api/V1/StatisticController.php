@@ -7,6 +7,7 @@ use App\Jobs\CountAnswer;
 use App\Jobs\InitiateSwiper;
 use App\Jobs\SaveResult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class StatisticController extends Controller
 {
@@ -23,7 +24,8 @@ class StatisticController extends Controller
             $request->input('election_id'),
             $request->input('question_id'),
             $request->input('answer'),
-            $request->input('platform')
+            $request->input('platform'),
+            App::getLocale(),
         );
 
         return ['status' => 'ok'];
@@ -40,7 +42,8 @@ class StatisticController extends Controller
     {
         InitiateSwiper::dispatch(
             $request->input('election_id'),
-            $request->input('platform')
+            $request->input('platform'),
+            App::getLocale(),
         );
 
         return ['status' => 'ok'];
@@ -59,7 +62,8 @@ class StatisticController extends Controller
             $request->input('election_id'),
             $request->input('result'),
             $request->input('top_party_id'),
-            $request->input('platform')
+            $request->input('platform'),
+            App::getLocale(),
         );
 
         return ['status' => 'ok'];

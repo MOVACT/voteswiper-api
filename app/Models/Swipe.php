@@ -20,6 +20,7 @@ class Swipe extends Model
         'election_id',
         'answer',
         'platform',
+        'locale'
     ];
 
     public function election(): BelongsTo

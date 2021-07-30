@@ -18,18 +18,20 @@ class CountAnswer implements ShouldQueue
     protected $question_id;
     protected $answer;
     protected $platform;
+    protected $locale;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(int $election_id, int $question_id, int $answer, string $platform)
+    public function __construct(int $election_id, int $question_id, int $answer, string $platform, string $locale)
     {
         $this->election_id = $election_id;
         $this->question_id = $question_id;
         $this->answer = $answer;
         $this->platform = $platform;
+        $this->locale = $locale;
     }
 
     /**
@@ -44,6 +46,7 @@ class CountAnswer implements ShouldQueue
             'question_id' => $this->question_id,
             'answer' => $this->answer,
             'platform' => $this->platform,
+            'locale' => $this->locale
         ]);
     }
 }

@@ -18,18 +18,20 @@ class SaveResult implements ShouldQueue
     protected $result;
     protected $party_id;
     protected $platform;
+    protected $locale;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(int $election_id, string $result, int $party_id, string $platform)
+    public function __construct(int $election_id, string $result, int $party_id, string $platform, string $locale)
     {
         $this->election_id = $election_id;
         $this->result = json_decode($result);
         $this->party_id = $party_id;
         $this->platform = $platform;
+        $this->locale = $locale;
     }
 
     /**
@@ -44,6 +46,7 @@ class SaveResult implements ShouldQueue
             'result' => $this->result,
             'party_id' => $this->party_id,
             'platform' => $this->platform,
+            'locale' => $this->locale,
         ]);
     }
 }

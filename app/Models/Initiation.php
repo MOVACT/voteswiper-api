@@ -18,6 +18,7 @@ class Initiation extends Model
     protected $fillable = [
         'election_id',
         'platform',
+        'locale'
     ];
 
     public function election(): BelongsTo

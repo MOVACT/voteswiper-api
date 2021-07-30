@@ -16,16 +16,18 @@ class InitiateSwiper implements ShouldQueue
 
     protected $election_id;
     protected $platform;
+    protected $locale;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(int $election_id, string $platform)
+    public function __construct(int $election_id, string $platform, string $locale)
     {
         $this->election_id = $election_id;
         $this->platform = $platform;
+        $this->locale = $locale;
     }
 
     /**
@@ -38,6 +40,7 @@ class InitiateSwiper implements ShouldQueue
         Initiation::create([
             'election_id' => $this->election_id,
             'platform' => $this->platform,
+            'locale' => $this->locale
         ]);
     }
 }

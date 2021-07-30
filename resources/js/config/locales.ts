@@ -31,6 +31,22 @@ const locales: {
         label: 'English',
         flag: FlagUS,
     },
+    ru: {
+        label: 'Russian',
+        flag: FlagUS,
+    },
+    fa: {
+        label: 'Farsi',
+        flag: FlagUS,
+    },
+    ar: {
+        label: 'Arabic',
+        flag: FlagUS,
+    },
+    tr: {
+        label: 'Turkish',
+        flag: FlagUS,
+    },
 };
 
 export default locales;

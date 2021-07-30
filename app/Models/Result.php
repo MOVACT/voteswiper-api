@@ -20,6 +20,7 @@ class Result extends Model
         'party_id',
         'result',
         'platform',
+        'locale'
     ];
 
     protected $casts = [
