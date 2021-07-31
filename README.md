@@ -16,7 +16,7 @@ sail up
 
 ## How to contribute
 
-We appreciate any contribution and feedback. Feel free to open an issue if you find errors or use the discussion board if you'd like to suggest new features. You can also contribute code directly by opening a pull request. If you want to implement a new feature, please open a discussion first to see if we would merge it.
+We appreciate any feedback. Feel free to open an issue if you find errors or use the discussion board if you'd like to suggest new features.
 
 ## Security Bugs
 
