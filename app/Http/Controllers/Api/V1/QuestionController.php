@@ -22,6 +22,8 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
+        $isPreview = $request->header('API-Preview-Key', 'default') === env('API_PREVIEW_KEY');
+
         if (!$request->input('slug') && !$request->input('id')) {
             throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug or id was provided.');
         }
@@ -31,7 +33,7 @@ class QuestionController extends Controller
 
         $cacheKey = $currentLocale . '_questions_' . $value;
 
-        if (!Cache::has($cacheKey)) {
+        if (!Cache::has($cacheKey) || $isPreview) {
             if ($request->input('id')) {
                 $election = Election::where('id', $request->input('id'));
             } else {
@@ -40,9 +42,17 @@ class QuestionController extends Controller
                 });
             }
 
-            $election = $election->where('published', true)->where('playable', true)->firstOrFail();
+            if ($isPreview) {
+                $election = $election->firstOrFail();
+            } else {
+                $election = $election->where('published', true)->where('playable', true)->firstOrFail();
+                Cache::put($cacheKey, $election->questions()->ordered()->with('thumbnail')->get(), now()->addMinutes(120));
+            }
 
-            Cache::put($cacheKey, $election->questions()->ordered()->with('thumbnail')->get(), now()->addMinutes(120));
+        }
+
+        if ($isPreview) {
+            return $election->questions()->ordered()->with('thumbnail')->get();
         }
 
         return Cache::get($cacheKey);

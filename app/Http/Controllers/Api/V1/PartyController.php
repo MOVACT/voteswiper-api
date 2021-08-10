@@ -24,6 +24,8 @@ class PartyController extends Controller
      */
     public function index(Request $request)
     {
+        $isPreview = $request->header('API-Preview-Key', 'default') === env('API_PREVIEW_KEY');
+
         if (!$request->input('slug') && !$request->input('id')) {
             throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug or id was provided.');
         }
@@ -33,7 +35,7 @@ class PartyController extends Controller
 
         $cacheKey = $currentLocale . '_parties_' . $value;
 
-        if (!Cache::has($cacheKey)) {
+        if (!Cache::has($cacheKey) || $isPreview) {
             if ($request->input('id')) {
                 $election = Election::where('id', $request->input('id'));
             } else {
@@ -42,9 +44,16 @@ class PartyController extends Controller
                 });
             }
 
-            $election = $election->where('published', true)->with('card')->firstOrFail();
+            if ($isPreview) {
+                $election = $election->with('card')->firstOrFail();
 
-            $parties = $election->parties()->where('playable', true)->where('published', true)->with('logo')->orderBy('name')->get();
+                $parties = $election->parties()->where('playable', true)->with('logo')->orderBy('name')->get();
+            } else {
+                $election = $election->where('published', true)->with('card')->firstOrFail();
+
+                $parties = $election->parties()->where('playable', true)->where('published', true)->with('logo')->orderBy('name')->get();
+            }
+
 
             $list = [];
 
@@ -62,7 +71,13 @@ class PartyController extends Controller
                 );
             }
 
-            Cache::put($cacheKey, $list, now()->addMinutes(120));
+            if (!$isPreview) {
+                Cache::put($cacheKey, $list, now()->addMinutes(120));
+            }
+        }
+
+        if ($isPreview) {
+            return $list;
         }
 
         return Cache::get($cacheKey);

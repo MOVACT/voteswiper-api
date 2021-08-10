@@ -47,6 +47,10 @@ const locales: {
         label: 'Turkish',
         flag: FlagUS,
     },
+    ku: {
+        label: 'Kurdish',
+        flag: FlagUS,
+    },
 };
 
 export default locales;
