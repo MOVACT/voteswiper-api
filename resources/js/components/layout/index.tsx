@@ -1,6 +1,7 @@
 import { Page } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import {
+    IconChartLine,
     IconDatabaseOff,
     IconFlag2,
     IconListCheck,
@@ -146,6 +147,28 @@ export const Layout: React.FC = ({ children }) => {
                                         </span>
                                         <span className="nav-link-title">
                                             Users
+                                        </span>
+                                    </InertiaLink>
+                                </li>
+
+                                <li
+                                    className={cn(
+                                        'nav-item',
+                                        route()
+                                            .current()
+                                            .indexOf('admin.statistic') > -1 &&
+                                            'active'
+                                    )}
+                                >
+                                    <InertiaLink
+                                        href={route('admin.statistic')}
+                                        className="nav-link"
+                                    >
+                                        <span className="nav-link-icon d-md-none d-lg-inline-block">
+                                            <IconChartLine size={24} />
+                                        </span>
+                                        <span className="nav-link-title">
+                                            Statistic
                                         </span>
                                     </InertiaLink>
                                 </li>

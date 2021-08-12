@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ElectionController;
 use App\Http\Controllers\Admin\ElectionPartyController;
 use App\Http\Controllers\Admin\ElectionQuestionController;
 use App\Http\Controllers\Admin\PartyController;
+use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -95,4 +96,10 @@ Route::name('admin.')->middleware(["web", "auth"])->group(function () {
     Route::get('/elections/{election}/parties/{party}', [ElectionPartyController::class, 'show'])->name('election.parties.show');
     Route::get('/elections/{election}/parties/{party}/answers', [ElectionPartyController::class, 'editAnswers'])->name('election.parties.answers');
     Route::post('/elections/{election}/parties/{party}/answers', [ElectionPartyController::class, 'storeAnswers'])->name('election.parties.answers.store');
+
+    /**
+     * Statistic
+     */
+    Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic');
+    Route::get('/statistic/{election}', [StatisticController::class, 'election'])->name('statistic.election');
 });
