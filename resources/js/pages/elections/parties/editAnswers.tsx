@@ -7,7 +7,7 @@ import cn from 'classnames';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import route from 'ziggy-js';
-import Answer from '../../../components/form/answer';
+import AnswerComponent from '../../../components/form/answer';
 import Textarea from '../../../components/form/textarea';
 import { Layout } from '../../../components/layout';
 import { Page } from '../../../components/page';
@@ -17,6 +17,7 @@ interface Props extends GlobalProps {
     party: Party;
     questions: Question[];
     pivot: ElectionPartyPivot;
+    answers: Answer[];
 }
 
 const PartyEditAnswers: InertiaPage = () => {
@@ -24,14 +25,14 @@ const PartyEditAnswers: InertiaPage = () => {
 
     const getAnswer = React.useCallback(
         (id: number) => {
-            const answerIndex = props.pivot.answers.findIndex(
+            const answerIndex = props.answers.findIndex(
                 (a) => a.question_id === id
             );
 
             if (answerIndex > -1) {
                 return {
-                    answer: props.pivot.answers[answerIndex].answer,
-                    reason: props.pivot.answers[answerIndex].reason,
+                    answer: props.answers[answerIndex].answer,
+                    reason: props.answers[answerIndex].reason,
                 };
             }
 
@@ -40,7 +41,7 @@ const PartyEditAnswers: InertiaPage = () => {
                 reason: '',
             };
         },
-        [props.pivot]
+        [props.answers]
     );
 
     const getInitialFormState = React.useCallback(() => {
@@ -135,7 +136,7 @@ const PartyEditAnswers: InertiaPage = () => {
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-12 col-lg-6">
-                                                <Answer
+                                                <AnswerComponent
                                                     error={
                                                         !!errors[
                                                             answerFieldName
