@@ -179,11 +179,16 @@ class ElectionPartyController extends Controller
             return redirect()->back()->with('error', __('This party is not attached to this election. Create it first.'));
         }
 
+        $pivot = $election->parties->find($party->id)->pivot;
+
+        // var_dump($pivot->answers()->get());//$election->parties->find($party->id)->pivot->with('answers')->first());
+
         return Inertia::render('elections/parties/editAnswers', [
             'election' => $election,
             'questions' => $election->questions()->ordered()->get(),
             'party' => $party,
-            'pivot' => $election->parties->find($party->id)->pivot->with('answers')->first(),
+            'pivot' => $pivot,
+            'answers' => $pivot->answers()->get(),
             // Overwrite locales so that you can only switch between the ones available
             'locales' => $election->translations_available
         ]);
