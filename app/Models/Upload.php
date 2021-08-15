@@ -104,6 +104,9 @@ class Upload extends Model
             $dimensions = getimagesize($file);
             $upload->width = $dimensions[0];
             $upload->height = $dimensions[1];
+        } else {
+            $upload->width = 0;
+            $upload->height = 0;
         }
 
         $file->storePubliclyAs($path, $safeFilename);
