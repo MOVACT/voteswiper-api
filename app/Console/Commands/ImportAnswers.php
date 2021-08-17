@@ -74,13 +74,23 @@ class ImportAnswers extends Command
         $this->info('Downloading file ' . $this->argument('file'));
 
         // Download file
-        $csv = array_map('str_getcsv', file($this->argument('file')));
+        $stream = fopen('php://memory', 'r+');
+        fwrite($stream, file_get_contents($this->argument('file')));
+        rewind($stream);
 
-        // Parse CSV
-        array_walk($csv, function(&$a) use ($csv) {
-            $a = array_combine($csv[0], $a);
-        });
-        array_shift($csv);
+        $headers = [];
+        $csv = [];
+
+        $i = 0;
+        while ($row = fgetcsv($stream, null, ',')) {
+            if ($i === 0) {
+                $headers = $row;
+            } else {
+                $csv[] = array_combine($headers, $row);
+            }
+            $i++;
+        }
+
 
         // Loop over parties
         foreach($csv as $party) {
