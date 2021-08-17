@@ -84,6 +84,7 @@ class ElectionController extends Controller
         return Inertia::render('elections/createOrEdit', [
             'election' => array_merge($election->with('card')->find($election->id)->toArray(), [
                 'name' => $election->getTranslation('name', App::currentLocale(), false),
+                'followup_link' => $election->getTranslation('followup_link', App::currentLocale(), false),
                 'slug' => $election->getTranslation('slug', App::currentLocale(), false),
             ]),
             'countries' => $countries,

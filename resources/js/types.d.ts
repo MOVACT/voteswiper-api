@@ -91,6 +91,7 @@ interface Election {
     country_id: number;
     country: Country;
     name: string;
+    followup_link: string;
     slug: string;
     card_upload_id: number;
     card: Upload;
