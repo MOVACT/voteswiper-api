@@ -97,6 +97,8 @@ class ImportAnswers extends Command
                     if ($value === 'Nein') $answerValue = 1;
                     if ($value === 'Ja') $answerValue = 2;
 
+                    $this->info('Answer for question ' . $key . ' for ' . $party["Partei"] . ': ' . $answerValue);
+
                     $answer = $pivot->answers()->where('question_id', $key)->first();
 
                     if (!$isRunningDry) {
