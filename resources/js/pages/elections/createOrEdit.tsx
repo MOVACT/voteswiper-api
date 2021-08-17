@@ -26,6 +26,7 @@ const ElectionCreateOrEdit: InertiaPage = () => {
     const { data, setData, post, processing, errors } = useForm({
         country_id: props.election ? props.election.country_id : '',
         name: props.election ? props.election.name : '',
+        followup_link: props.election ? props.election.followup_link : '',
         published: props.election ? props.election.published : false,
         playable: props.election ? props.election.playable : false,
         voting_day: props.election ? props.election.voting_day : '',
@@ -101,6 +102,20 @@ const ElectionCreateOrEdit: InertiaPage = () => {
                                     value={data.name}
                                     onChange={(e) =>
                                         setData('name', e.target.value)
+                                    }
+                                />
+
+                                <Input
+                                    error={!!errors.followup_link}
+                                    helperText={
+                                        errors.followup_link ?? undefined
+                                    }
+                                    disabled={processing}
+                                    id="followup_link"
+                                    label="Follow Up Link"
+                                    value={data.followup_link}
+                                    onChange={(e) =>
+                                        setData('followup_link', e.target.value)
                                     }
                                 />
                             </div>

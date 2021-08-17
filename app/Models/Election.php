@@ -22,6 +22,7 @@ class Election extends Model
      */
     public $translatable = [
         'name',
+        'followup_link',
         'slug'
     ];
 
@@ -33,6 +34,7 @@ class Election extends Model
     protected $fillable = [
         'country_id',
         'name',
+        'followup_link',
         'slug',
         'published',
         'playable',
