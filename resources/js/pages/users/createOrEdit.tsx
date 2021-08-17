@@ -10,7 +10,7 @@ import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
 interface Props {
-    user?: {
+    edit_user?: {
         name: string;
         email: string;
         id: number;
@@ -21,15 +21,18 @@ const UserCreateOrEdit: InertiaPage = () => {
     const { props } = usePage<PageType<Props>>();
 
     const { data, setData, post, put, processing, errors } = useForm({
-        name: props.user ? props.user.name : '',
-        email: props.user ? props.user.email : '',
+        name: props.edit_user ? props.edit_user.name : '',
+        email: props.edit_user ? props.edit_user.email : '',
     });
 
     const submit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        if (props.user) {
-            put(route('admin.users.update', { user: props.user.id }), data);
+        if (props.edit_user) {
+            put(
+                route('admin.users.update', { user: props.edit_user.id }),
+                data
+            );
             return;
         }
 
@@ -38,14 +41,20 @@ const UserCreateOrEdit: InertiaPage = () => {
 
     return (
         <Page
-            title={props.user ? `Edit user ${props.user.name}` : 'Add new User'}
+            title={
+                props.edit_user
+                    ? `Edit user ${props.edit_user.name}`
+                    : 'Add new User'
+            }
         >
-            <Helmet title={props.user ? 'Edit User' : 'Create User'} />
+            <Helmet title={props.edit_user ? 'Edit User' : 'Create User'} />
             <form
                 onSubmit={submit}
                 action={
-                    props.user
-                        ? route('admin.users.update', { user: props.user.id })
+                    props.edit_user
+                        ? route('admin.users.update', {
+                              user: props.edit_user.id,
+                          })
                         : route('admin.users.store')
                 }
                 method="post"
