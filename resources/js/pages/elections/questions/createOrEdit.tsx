@@ -21,7 +21,7 @@ interface Props extends GlobalProps {
 const QuestionCreateOrEdit: InertiaPage = () => {
     const { props } = usePage<PageType<Props>>();
 
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         thesis: props.question ? props.question.thesis : '',
         topic: props.question ? props.question.topic : '',
         video_url: props.question ? props.question.video_url : '',
@@ -36,11 +36,11 @@ const QuestionCreateOrEdit: InertiaPage = () => {
         e.preventDefault();
 
         if (props.question) {
-            put(
-                route('admin.election.questions.update', {
+            post(
+                `${route('admin.election.questions.update', {
                     election: props.election.id,
                     question: props.question.id,
-                }),
+                })}?_method=PUT`,
                 data
             );
             return;
