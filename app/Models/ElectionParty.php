@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -37,4 +38,11 @@ class ElectionParty extends Pivot
       return $this->hasMany(Answer::class, 'electionparty_id');
     }
 
+    /**
+     * Get the uploaded file
+     */
+    public function program(): BelongsTo
+    {
+        return $this->belongsTo(Upload::class, 'program_upload_id', 'id');
+    }
 }

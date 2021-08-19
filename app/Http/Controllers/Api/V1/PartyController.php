@@ -64,7 +64,8 @@ class PartyController extends Controller
                         'pivot' => array_merge(
                             $party->pivot->toArray(),
                             [
-                                'answers' => $party->pivot->answers
+                                'answers' => $party->pivot->answers,
+                                'program' => $party->pivot->program
                             ]
                         )
                     ]
