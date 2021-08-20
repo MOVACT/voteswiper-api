@@ -19,7 +19,7 @@ interface Props extends GlobalProps {
 const PartyCreateOrEdit: InertiaPage = () => {
     const { props } = usePage<PageType<Props>>();
 
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         country_id: props.party ? props.party.country_id : '',
         name: props.party ? props.party.name : '',
         full_name: props.party ? props.party.full_name : '',
@@ -34,7 +34,12 @@ const PartyCreateOrEdit: InertiaPage = () => {
         if (props.party) {
             // We're using post here with an additional field because
             // PHP won't read a file from a put request
-            put(route('admin.parties.update', { party: props.party.id }), data);
+            post(
+                `${route('admin.parties.update', {
+                    party: props.party.id,
+                })}?_method=PUT`,
+                data
+            );
             return;
         }
 
