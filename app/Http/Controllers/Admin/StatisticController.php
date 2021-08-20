@@ -33,18 +33,11 @@ class StatisticController extends Controller
         $initiations = Initiation::where('election_id', $election->id)->count();
         $results = Result::where('election_id', $election->id)->count();
 
-        $groupedSwipes = DB::table('swipes')
-            ->where('election_id', $election->id)
-            ->select('platform', DB::raw('count(*) as total'))
-            ->groupBy('platform')
-            ->get();
-
         return Inertia::render('statistic/election', [
             'election' => $election,
             'swipes' => $swipes,
             'initiations' => $initiations,
             'results' => $results,
-            'groupedSwipes' => $groupedSwipes
         ]);
     }
 }
