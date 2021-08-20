@@ -39,12 +39,24 @@ class StatisticController extends Controller
             ->groupBy('platform')
             ->get();
 
+        $webSwipes = Swipe::where('election_id', $election->id)->where('platform', 'web')->count();
+        $iosSwipes = Swipe::where('election_id', $election->id)->where('platform', 'ios')->count();
+        $androidSwipes = Swipe::where('election_id', $election->id)->where('platform', 'android')->count();
+        $otherSwipes = Swipe::where('election_id', $election->id)
+            ->where('platform', '!=', 'web')
+            ->where('platform', '!=', 'ios')
+            ->where('platform', '!=', 'android')
+            ->count();
+
         return Inertia::render('statistic/election', [
             'election' => $election,
             'swipes' => $swipes,
             'initiations' => $initiations,
             'results' => $results,
-            'groupedSwipes' => $groupedSwipes
+            'webSwipes' => $webSwipes,
+            'iosSwipes' => $iosSwipes,
+            'androidSwipes' => $androidSwipes,
+            'otherSwipes' => $otherSwipes
         ]);
     }
 }
