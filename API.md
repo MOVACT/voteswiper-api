@@ -2,6 +2,15 @@
 
 The following document describes our API endpoints. We will follow up with a more sophisticated API documentation in the future, but since we got a lot of requests on acquiring raw data, we will provide this document in the meantime.
 
+ - [Base URL](#base-url)
+ - [Fetching a specific locale](#fetching-a-specific-locale)
+ - [API Requests](#api-requests)
+	 - [Fetch Countries](#fetch-countries)
+	 - [Fetch Elections](#fetch-elections-for-country)
+	 - [Fetch Election](#fetch-election)
+	 - [Fetch Questions](#fetch-questions)
+	 - [Fetch Parties (and answers)](#fetch-parties)
+
 ## Base URL
 
 The base URL for our api is `https://api.voteswiper.org/api`.
