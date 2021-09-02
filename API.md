@@ -385,7 +385,7 @@ OR
 
 ### Fetch Parties
 
-Fetches parties for an election as well as their answers
+Fetches parties for an election as well as their answers.
 
 **URL** : `/parties`
 
@@ -406,6 +406,8 @@ OR
 ```
 
 #### Success Response
+
+The `answer` property has the values `0` (no answer), `1` (no) and `2` (yes).
 
 **Code** : `200 OK`
 
