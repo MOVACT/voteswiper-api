@@ -82,7 +82,7 @@ class ImportAnswers extends Command
         $csv = [];
 
         $i = 0;
-        while ($row = fgetcsv($stream, null, ',')) {
+        while ($row = fgetcsv($stream, null, ';')) {
             if ($i === 0) {
                 $headers = $row;
             } else {
