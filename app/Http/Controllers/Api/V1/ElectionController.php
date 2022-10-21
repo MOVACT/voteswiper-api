@@ -85,21 +85,32 @@ class ElectionController extends Controller
             throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election was provided.');
         }
 
+        $isPreview = $request->header('API-Preview-Key', 'default') === env('API_PREVIEW_KEY');
+
         $currentLocale = App::getLocale();
         $value = $request->input('id') ?? $request->input('slug');
 
         $cacheKey = $currentLocale . '_election_' . '_' . $value;
 
-        if (!Cache::has($cacheKey)) {
+        if (!Cache::has($cacheKey) || $isPreview) {
             if ($request->input('id')) {
-                $election = Election::where('id', $request->input('id'))->where('published', true)->with('card')->firstOrFail();
+                $election = Election::where('id', $request->input('id'));
             } else {
                 $election = Election::where(function($query) use($request, $currentLocale) {
                     $query->where('slug->' . $currentLocale, $request->input('slug'))->orWhere('slug->en', $request->input('slug'));
-                })->where('published', true)->with('card')->firstOrFail();
+                });
             }
 
-            Cache::put($cacheKey, $election, now()->addMinutes(120));
+            if ($isPreview) {
+                $election = $election->with('card')->firstOrFail();
+            } else {
+                $election = $election->where('published', true)->with('card')->firstOrFail();
+            }
+
+
+            if (!$isPreview) {
+                Cache::put($cacheKey, $election, now()->addMinutes(120));
+            }
         }
 
         return Cache::get($cacheKey);
