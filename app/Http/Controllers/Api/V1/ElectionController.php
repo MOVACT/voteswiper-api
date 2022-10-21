@@ -113,6 +113,10 @@ class ElectionController extends Controller
             }
         }
 
+        if ($isPreview) {
+            return $election;
+        }
+
         return Cache::get($cacheKey);
     }
 
