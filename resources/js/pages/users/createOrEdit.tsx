@@ -4,7 +4,7 @@ import { Page as PageType } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
@@ -29,14 +29,11 @@ const UserCreateOrEdit: InertiaPage = () => {
         e.preventDefault();
 
         if (props.edit_user) {
-            put(
-                route('admin.users.update', { user: props.edit_user.id }),
-                data
-            );
+            put(route('admin.users.update', { user: props.edit_user.id }));
             return;
         }
 
-        post(route('admin.users.store'), data);
+        post(route('admin.users.store'));
     };
 
     return (

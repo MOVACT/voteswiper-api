@@ -1,9 +1,9 @@
 import { Page as PageType } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { IconPlus } from '@tabler/icons';
+import { IconPlus } from '@tabler/icons-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
@@ -63,8 +63,7 @@ const Users: InertiaPage = () => {
                                                             href={route(
                                                                 'admin.users.edit',
                                                                 {
-                                                                    user:
-                                                                        user.id,
+                                                                    user: user.id,
                                                                 }
                                                             )}
                                                             className="btn btn-white"

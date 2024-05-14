@@ -8,7 +8,7 @@ interface Props
     > {
     label: string;
     error: boolean;
-    helperText?: boolean;
+    helperText?: string | React.ReactNode;
 }
 
 const Toggle: React.FC<Props> = ({

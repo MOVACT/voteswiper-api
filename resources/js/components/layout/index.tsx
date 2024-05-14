@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Page } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import {
@@ -7,10 +8,10 @@ import {
     IconListCheck,
     IconMap,
     IconUsers,
-} from '@tabler/icons';
+} from '@tabler/icons-react';
 import cn from 'classnames';
 import React from 'react';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import { LocaleSwitch } from '../locale-switch';
 
 export const Layout: React.FC = ({ children }) => {
@@ -67,7 +68,7 @@ export const Layout: React.FC = ({ children }) => {
                                     className={cn(
                                         'nav-item',
                                         route()
-                                            .current()
+                                            .current()!
                                             .indexOf('admin.elections') > -1 &&
                                             'active'
                                     )}
@@ -89,7 +90,7 @@ export const Layout: React.FC = ({ children }) => {
                                     className={cn(
                                         'nav-item',
                                         route()
-                                            .current()
+                                            .current()!
                                             .indexOf('admin.countries') > -1 &&
                                             'active'
                                     )}
@@ -111,7 +112,7 @@ export const Layout: React.FC = ({ children }) => {
                                     className={cn(
                                         'nav-item',
                                         route()
-                                            .current()
+                                            .current()!
                                             .indexOf('admin.parties') > -1 &&
                                             'active'
                                     )}
@@ -133,7 +134,7 @@ export const Layout: React.FC = ({ children }) => {
                                     className={cn(
                                         'nav-item',
                                         route()
-                                            .current()
+                                            .current()!
                                             .indexOf('admin.users') > -1 &&
                                             'active'
                                     )}
@@ -155,7 +156,7 @@ export const Layout: React.FC = ({ children }) => {
                                     className={cn(
                                         'nav-item',
                                         route()
-                                            .current()
+                                            .current()!
                                             .indexOf('admin.statistic') > -1 &&
                                             'active'
                                     )}

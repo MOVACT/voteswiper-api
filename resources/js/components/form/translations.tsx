@@ -6,7 +6,7 @@ interface Props {
     label: string;
     error: boolean;
     disabled?: boolean;
-    helperText?: boolean;
+    helperText?: string | React.ReactNode;
     value: string[];
     onChange: (translations: string[]) => void;
 }

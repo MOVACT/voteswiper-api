@@ -4,7 +4,7 @@ import { Page as PageType } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Datepicker from '../../components/form/datepicker';
 import Input from '../../components/form/input';
 import Select from '../../components/form/select';
@@ -45,13 +45,12 @@ const ElectionCreateOrEdit: InertiaPage = () => {
             post(
                 `${route('admin.elections.update', {
                     election: props.election.id,
-                })}?_method=PUT`,
-                data
+                })}?_method=PUT`
             );
             return;
         }
 
-        post(route('admin.elections.store'), data);
+        post(route('admin.elections.store'));
     };
 
     return (
@@ -225,6 +224,7 @@ const ElectionCreateOrEdit: InertiaPage = () => {
                                             e.target.files &&
                                             e.target.files[0]
                                         ) {
+                                            // @ts-expect-error Typing
                                             setData('card', e.target.files[0]);
                                         }
                                     }}

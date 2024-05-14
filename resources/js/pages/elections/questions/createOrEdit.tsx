@@ -2,10 +2,10 @@ import { Page as PageType } from '@inertiajs/inertia';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
-import { IconArrowLeft } from '@tabler/icons';
+import { IconArrowLeft } from '@tabler/icons-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Input from '../../../components/form/input';
 import Textarea from '../../../components/form/textarea';
 import Image from '../../../components/image';
@@ -40,8 +40,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                 `${route('admin.election.questions.update', {
                     election: props.election.id,
                     question: props.question.id,
-                })}?_method=PUT`,
-                data
+                })}?_method=PUT`
             );
             return;
         }
@@ -49,8 +48,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
         post(
             route('admin.election.questions.store', {
                 election: props.election.id,
-            }),
-            data
+            })
         );
     };
 
@@ -144,7 +142,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                                     disabled={processing}
                                     id="video_url"
                                     label="Video URL"
-                                    value={data.video_url}
+                                    value={data.video_url ?? ''}
                                     onChange={(e) =>
                                         setData('video_url', e.target.value)
                                     }
@@ -159,7 +157,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                                     disabled={processing}
                                     id="explainer_text"
                                     label="Explainer Text"
-                                    value={data.explainer_text}
+                                    value={data.explainer_text ?? ''}
                                     onChange={(e) =>
                                         setData(
                                             'explainer_text',
@@ -189,6 +187,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                                         ) {
                                             setData(
                                                 'thumbnail',
+                                                // @ts-expect-error typings
                                                 e.target.files[0]
                                             );
                                         }

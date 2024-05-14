@@ -2,10 +2,10 @@ import { Page as PageType } from '@inertiajs/inertia';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
-import { IconArrowLeft } from '@tabler/icons';
+import { IconArrowLeft } from '@tabler/icons-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Input from '../../../components/form/input';
 import Select from '../../../components/form/select';
 import Toggle from '../../../components/form/toggle';
@@ -40,8 +40,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                 `${route('admin.election.parties.update', {
                     election: props.election.id,
                     party: props.party.id,
-                })}?_method=PUT`,
-                data
+                })}?_method=PUT`
             );
             return;
         }
@@ -49,8 +48,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
         post(
             route('admin.election.parties.store', {
                 election: props.election.id,
-            }),
-            data
+            })
         );
     };
 
@@ -165,6 +163,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                                         ) {
                                             setData(
                                                 'program',
+                                                // @ts-expect-error Typing
                                                 e.target.files[0]
                                             );
                                         }

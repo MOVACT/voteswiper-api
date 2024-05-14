@@ -4,7 +4,7 @@ import { Page as PageType } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 import Toggle from '../../components/form/toggle';
 import { Layout } from '../../components/layout';
@@ -35,14 +35,11 @@ const CountryCreateOrEdit: InertiaPage = () => {
         e.preventDefault();
 
         if (props.country) {
-            put(
-                route('admin.countries.update', { country: props.country.id }),
-                data
-            );
+            put(route('admin.countries.update', { country: props.country.id }));
             return;
         }
 
-        post(route('admin.countries.store'), data);
+        post(route('admin.countries.store'));
     };
 
     return (

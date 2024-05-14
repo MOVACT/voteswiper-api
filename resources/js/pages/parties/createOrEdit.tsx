@@ -4,7 +4,7 @@ import { Page as PageType } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 import Select from '../../components/form/select';
 import Image from '../../components/image';
@@ -37,13 +37,12 @@ const PartyCreateOrEdit: InertiaPage = () => {
             post(
                 `${route('admin.parties.update', {
                     party: props.party.id,
-                })}?_method=PUT`,
-                data
+                })}?_method=PUT`
             );
             return;
         }
 
-        post(route('admin.parties.store'), data);
+        post(route('admin.parties.store'));
     };
 
     return (
@@ -120,7 +119,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                             disabled={processing}
                             id="url"
                             label="URL (Website)"
-                            value={data.url}
+                            value={data.url ?? ''}
                             onChange={(e) => setData('url', e.target.value)}
                         />
 
@@ -131,6 +130,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                             helperText={errors.logo ?? undefined}
                             onChange={(e) => {
                                 if (e.target.files && e.target.files[0]) {
+                                    // @ts-expect-error Typing
                                     setData('logo', e.target.files[0]);
                                 }
                             }}

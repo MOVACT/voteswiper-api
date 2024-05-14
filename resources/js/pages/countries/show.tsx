@@ -1,9 +1,9 @@
 import { Page as PageType } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { IconPencil } from '@tabler/icons';
+import { IconPencil } from '@tabler/icons-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { LocaleWithFlag } from '../../components/locale-with-flag';
 import { Page } from '../../components/page';

@@ -7,7 +7,7 @@ interface Props
     > {
     label?: string;
     error: boolean;
-    helperText?: boolean;
+    helperText?: string | React.ReactNode;
 }
 
 const Answer: React.FC<Props> = ({

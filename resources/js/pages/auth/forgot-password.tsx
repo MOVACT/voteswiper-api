@@ -3,7 +3,7 @@
 import { useForm } from '@inertiajs/inertia-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 
 const ForgotPassword: React.FC = () => {

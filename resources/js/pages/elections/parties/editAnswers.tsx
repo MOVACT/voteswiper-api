@@ -2,11 +2,11 @@ import { Page as PageType } from '@inertiajs/inertia';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
-import { IconArrowLeft } from '@tabler/icons';
+import { IconArrowLeft } from '@tabler/icons-react';
 import cn from 'classnames';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import AnswerComponent from '../../../components/form/answer';
 import Textarea from '../../../components/form/textarea';
 import { Layout } from '../../../components/layout';

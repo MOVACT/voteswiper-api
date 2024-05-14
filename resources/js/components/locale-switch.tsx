@@ -1,10 +1,10 @@
 import { Page } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-react';
-import { IconLanguage } from '@tabler/icons';
+import { IconLanguage } from '@tabler/icons-react';
 import cn from 'classnames';
 import React from 'react';
 import { useClickAway } from 'react-use';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import localeStrings from '../config/locales';
 
 interface Props {

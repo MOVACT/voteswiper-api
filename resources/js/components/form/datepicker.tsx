@@ -7,7 +7,7 @@ import createDateFromMysql from '../../util/create-date-from-mysql';
 interface Props {
     label?: string;
     error: boolean;
-    helperText?: boolean;
+    helperText?: string | React.ReactNode;
     showTimeSelect?: boolean;
     value: string;
     required?: boolean;

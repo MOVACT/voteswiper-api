@@ -6,10 +6,10 @@ import {
     IconArrowUpCircle,
     IconEye,
     IconPlus,
-} from '@tabler/icons';
+} from '@tabler/icons-react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import { Layout } from '../../../components/layout';
 import { Page } from '../../../components/page';
 

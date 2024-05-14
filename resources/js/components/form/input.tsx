@@ -8,7 +8,7 @@ interface Props
     > {
     label?: string;
     error: boolean;
-    helperText?: boolean;
+    helperText?: string | React.ReactNode;
 }
 
 const Input: React.FC<Props> = ({ label, error, helperText, ...restProps }) => {

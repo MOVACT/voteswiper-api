@@ -31,6 +31,10 @@ const locales: {
         label: 'English',
         flag: FlagUS,
     },
+    it: {
+        label: 'Italian',
+        flag: FlagUS,
+    },
     ru: {
         label: 'Russian',
         flag: FlagUS,
