@@ -51,16 +51,6 @@ class Upload extends Model
     protected $appends = ['public_link'];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'width' => 'number',
-        'height' => 'number',
-    ];
-
-    /**
      * Upload a file and save it in the database
      *
      * @param UploadedFile $file The uploaded file
