@@ -8,7 +8,7 @@ interface AppContext {
 
 const AppContext = React.createContext({} as AppContext);
 
-const AppProvider: React.FC = ({ children }) => {
+const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [drawerOpen, setDrawerOpen] = useLocalStorage<
         AppContext['drawerOpen']
     >('admin:drawer', false);

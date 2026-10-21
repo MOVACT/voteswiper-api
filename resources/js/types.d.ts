@@ -1,6 +1,6 @@
-interface InertiaPage extends React.FC {
-    layout?: (page: React.ReactChildren) => React.ReactElement;
-}
+type InertiaPage = React.FC & {
+    layout?: (page: React.ReactNode) => React.ReactNode;
+};
 
 interface User {
     id: number;
@@ -9,6 +9,7 @@ interface User {
 }
 
 interface GlobalProps {
+    [key: string]: unknown;
     locale: string;
     locales: string[];
     user: User;

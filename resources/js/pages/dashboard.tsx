@@ -1,12 +1,11 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Head } from '@inertiajs/react';
 import { Layout } from '../components/layout';
 import { Page } from '../components/page';
 
 const Dashboard: InertiaPage = () => {
     return (
         <Page title="Dashboard">
-            <Helmet title="Dashboard" />
+            <Head title="Dashboard" />
         </Page>
     );
 };

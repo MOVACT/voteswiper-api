@@ -1,5 +1,4 @@
-import { Page } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
+import { usePage } from '@inertiajs/react';
 import React from 'react';
 import locales from '../config/locales';
 import { FlagWorld } from './flags/world';
@@ -9,7 +8,7 @@ interface Props {
 }
 
 export const LocaleWithFlag: React.FC<Props> = ({ locale }) => {
-    const { props } = usePage<Page<GlobalProps>>();
+    const { props } = usePage<GlobalProps>();
 
     const localeToShow = locale ? locale : props.locale;
 

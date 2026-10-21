@@ -1,10 +1,6 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { IconArrowLeft } from '@tabler/icons-react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../../components/form/input';
 import Textarea from '../../../components/form/textarea';
@@ -19,7 +15,7 @@ interface Props extends GlobalProps {
 }
 
 const QuestionCreateOrEdit: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { data, setData, post, processing, errors } = useForm({
         thesis: props.question ? props.question.thesis : '',
@@ -63,7 +59,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                     {props.question ? (
                         <div>
                             <small className="fs-6 text-sm text-secondary">
-                                <InertiaLink
+                                <Link
                                     href={route('admin.election.questions', {
                                         election: props.election.id,
                                     })}
@@ -71,7 +67,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                                 >
                                     <IconArrowLeft size={14} />
                                     {props.election.name}
-                                </InertiaLink>
+                                </Link>
                             </small>
                             <div>Edit question {props.question.thesis}</div>
                         </div>
@@ -81,7 +77,7 @@ const QuestionCreateOrEdit: InertiaPage = () => {
                 </>
             }
         >
-            <Helmet title={pageTitle} />
+            <Head title={pageTitle} />
             <form
                 onSubmit={submit}
                 encType="multipart/form-data"

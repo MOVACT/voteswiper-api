@@ -1,18 +1,15 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { IconEye, IconPlus } from '@tabler/icons-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
-interface Props {
+interface Props extends GlobalProps {
     elections: Election[];
 }
 
 const Elections: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
     const { elections } = props;
 
     return (
@@ -20,17 +17,17 @@ const Elections: InertiaPage = () => {
             title="All Elections"
             actions={
                 <div className="btn-list">
-                    <InertiaLink
+                    <Link
                         href={route('admin.elections.create')}
                         className="btn btn-primary d-inline-block"
                     >
                         <IconPlus size={24} />
                         Add new election
-                    </InertiaLink>
+                    </Link>
                 </div>
             }
         >
-            <Helmet title="All Elections" />
+            <Head title="All Elections" />
 
             <div className="row row-cards">
                 <div className="col-12">
@@ -60,20 +57,20 @@ const Elections: InertiaPage = () => {
                                                 </td>
                                                 <td>
                                                     {election.published ? (
-                                                        <span className="badge bg-success me-2">
+                                                        <span className="badge text-bg-success me-2">
                                                             Published
                                                         </span>
                                                     ) : (
-                                                        <span className="badge bg-danger me-2">
+                                                        <span className="badge text-bg-danger me-2">
                                                             Unpublished
                                                         </span>
                                                     )}
                                                     {election.playable ? (
-                                                        <span className="badge bg-success">
+                                                        <span className="badge text-bg-success">
                                                             Playable
                                                         </span>
                                                     ) : (
-                                                        <span className="badge bg-danger">
+                                                        <span className="badge text-bg-danger">
                                                             Not playable
                                                         </span>
                                                     )}
@@ -81,7 +78,7 @@ const Elections: InertiaPage = () => {
                                                 <td>{election.country.name}</td>
                                                 <td>
                                                     <div className="btn-list flex-nowrap">
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.parties',
                                                                 {
@@ -92,13 +89,13 @@ const Elections: InertiaPage = () => {
                                                             className="btn btn-white me-3"
                                                         >
                                                             Parties
-                                                            <span className="badge bg-primary ms-1">
+                                                            <span className="badge text-bg-primary ms-1">
                                                                 {
                                                                     election.parties_count
                                                                 }
                                                             </span>
-                                                        </InertiaLink>
-                                                        <InertiaLink
+                                                        </Link>
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.questions',
                                                                 {
@@ -109,14 +106,14 @@ const Elections: InertiaPage = () => {
                                                             className="btn btn-white me-3"
                                                         >
                                                             Questions
-                                                            <span className="badge bg-primary ms-1">
+                                                            <span className="badge text-bg-primary ms-1">
                                                                 {
                                                                     election.questions_count
                                                                 }
                                                             </span>
-                                                        </InertiaLink>
+                                                        </Link>
 
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.elections.edit',
                                                                 {
@@ -127,9 +124,9 @@ const Elections: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Edit
-                                                        </InertiaLink>
+                                                        </Link>
 
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.elections.show',
                                                                 {
@@ -142,7 +139,7 @@ const Elections: InertiaPage = () => {
                                                             <IconEye
                                                                 size={24}
                                                             />
-                                                        </InertiaLink>
+                                                        </Link>
                                                     </div>
                                                 </td>
                                             </tr>

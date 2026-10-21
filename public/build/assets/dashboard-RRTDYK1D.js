@@ -1,0 +1,1 @@
+import{n as e,t}from"./page-Bg03rQBI.js";import{i as n,t as r}from"./app-CX90CI8F.js";var i=r(),a=()=>(0,i.jsx)(t,{title:`Dashboard`,children:(0,i.jsx)(n,{title:`Dashboard`})});a.layout=t=>(0,i.jsx)(e,{children:t});export{a as default};

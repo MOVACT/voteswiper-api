@@ -1,11 +1,8 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Head, usePage } from '@inertiajs/react';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
-interface Props {
+interface Props extends GlobalProps {
     election: Election;
     swipes: number;
     initiations: number;
@@ -13,11 +10,11 @@ interface Props {
 }
 
 const StatisticElection: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     return (
         <Page title={`Statistic for ${props.election.name}`}>
-            <Helmet title={`Statistic for ${props.election.name}`} />
+            <Head title={`Statistic for ${props.election.name}`} />
 
             <div className="row row-deck row-cards mb-4">
                 <div className="col-sm-6 col-lg-4">

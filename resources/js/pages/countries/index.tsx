@@ -1,8 +1,5 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { IconPlus } from '@tabler/icons-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
@@ -17,12 +14,12 @@ interface Country {
     parties_count: number;
 }
 
-interface Props {
+interface Props extends GlobalProps {
     countries: Country[];
 }
 
 const Countries: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
     const { countries } = props;
 
     return (
@@ -30,17 +27,17 @@ const Countries: InertiaPage = () => {
             title="All Countries"
             actions={
                 <div className="btn-list">
-                    <InertiaLink
+                    <Link
                         href={route('admin.countries.create')}
                         className="btn btn-primary d-inline-block"
                     >
                         <IconPlus size={24} />
                         Add new country
-                    </InertiaLink>
+                    </Link>
                 </div>
             }
         >
-            <Helmet title="All Countries" />
+            <Head title="All Countries" />
 
             <div className="row row-cards">
                 <div className="col-12">
@@ -65,18 +62,18 @@ const Countries: InertiaPage = () => {
                                                 <td>{country.slug}</td>
                                                 <td>
                                                     {country.published ? (
-                                                        <span className="badge bg-success">
+                                                        <span className="badge text-bg-success">
                                                             Published
                                                         </span>
                                                     ) : (
-                                                        <span className="badge bg-danger">
+                                                        <span className="badge text-bg-danger">
                                                             Unpublished
                                                         </span>
                                                     )}
                                                 </td>
                                                 <td>
                                                     <div className="btn-list flex-nowrap">
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.parties',
                                                                 {
@@ -87,13 +84,13 @@ const Countries: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Parties
-                                                            <span className="badge bg-primary ms-1">
+                                                            <span className="badge text-bg-primary ms-1">
                                                                 {
                                                                     country.parties_count
                                                                 }
                                                             </span>
-                                                        </InertiaLink>
-                                                        <InertiaLink
+                                                        </Link>
+                                                        <Link
                                                             href={route(
                                                                 'admin.countries.edit',
                                                                 {
@@ -104,7 +101,7 @@ const Countries: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Edit
-                                                        </InertiaLink>
+                                                        </Link>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -1,9 +1,5 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 import Toggle from '../../components/form/toggle';
@@ -22,7 +18,7 @@ interface Props extends GlobalProps {
 }
 
 const CountryCreateOrEdit: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { data, setData, post, put, processing, errors } = useForm({
         name: props.country ? props.country.name : '',
@@ -50,7 +46,7 @@ const CountryCreateOrEdit: InertiaPage = () => {
                     : 'Add new Country'
             }
         >
-            <Helmet title={props.country ? 'Edit Country' : 'Create Country'} />
+            <Head title={props.country ? 'Edit Country' : 'Create Country'} />
             <form
                 onSubmit={submit}
                 action={

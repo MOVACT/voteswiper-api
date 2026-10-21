@@ -1,9 +1,5 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 import Select from '../../components/form/select';
@@ -17,7 +13,7 @@ interface Props extends GlobalProps {
 }
 
 const PartyCreateOrEdit: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { data, setData, post, processing, errors } = useForm({
         country_id: props.party ? props.party.country_id : '',
@@ -51,7 +47,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                 props.party ? `Edit party ${props.party.name}` : 'Add new Party'
             }
         >
-            <Helmet title={props.party ? 'Edit Party' : 'Create Party'} />
+            <Head title={props.party ? 'Edit Party' : 'Create Party'} />
             <form
                 onSubmit={submit}
                 encType="multipart/form-data"

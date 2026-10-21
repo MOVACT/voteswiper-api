@@ -1,11 +1,10 @@
 import cn from 'classnames';
 import React from 'react';
 
-interface Props
-    extends React.DetailedHTMLProps<
-        React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-        HTMLTextAreaElement
-    > {
+interface Props extends React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+> {
     label?: string;
     error: boolean;
     helperText?: string | React.ReactNode;

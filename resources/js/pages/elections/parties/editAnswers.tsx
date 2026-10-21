@@ -1,11 +1,7 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { IconArrowLeft } from '@tabler/icons-react';
 import cn from 'classnames';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import AnswerComponent from '../../../components/form/answer';
 import Textarea from '../../../components/form/textarea';
@@ -21,7 +17,7 @@ interface Props extends GlobalProps {
 }
 
 const PartyEditAnswers: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const getAnswer = React.useCallback(
         (id: number) => {
@@ -79,7 +75,7 @@ const PartyEditAnswers: InertiaPage = () => {
             title={
                 <div>
                     <small className="fs-6 text-sm text-secondary">
-                        <InertiaLink
+                        <Link
                             href={route('admin.election.parties', {
                                 election: props.election.id,
                             })}
@@ -87,7 +83,7 @@ const PartyEditAnswers: InertiaPage = () => {
                         >
                             <IconArrowLeft size={14} />
                             {props.election.name}
-                        </InertiaLink>
+                        </Link>
                     </small>
                     <div>
                         Edit answers for {props.party.name} on{' '}
@@ -96,7 +92,7 @@ const PartyEditAnswers: InertiaPage = () => {
                 </div>
             }
         >
-            <Helmet title={pageTitle} />
+            <Head title={pageTitle} />
             <form
                 onSubmit={submit}
                 encType="multipart/form-data"

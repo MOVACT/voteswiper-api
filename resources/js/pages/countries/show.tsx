@@ -1,8 +1,5 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { IconPencil } from '@tabler/icons-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { LocaleWithFlag } from '../../components/locale-with-flag';
@@ -14,14 +11,14 @@ interface Props extends GlobalProps {
 }
 
 const CountriesShow: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
     const { country } = props;
 
     const pageTitle = getTranslatedValue(country.name, 'en', 'Show Country');
 
     return (
         <Page title={pageTitle}>
-            <Helmet title={pageTitle} />
+            <Head title={pageTitle} />
 
             <div className="row row-cards">
                 {props.locales.map((language) => {
@@ -34,7 +31,7 @@ const CountriesShow: InertiaPage = () => {
                                 <div className="card-header justify-content-between">
                                     <LocaleWithFlag locale={language} />
 
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.locale', {
                                             key: language,
                                             redirect: route(
@@ -45,7 +42,7 @@ const CountriesShow: InertiaPage = () => {
                                         className="btn btn-icon btn-primary"
                                     >
                                         <IconPencil size={16} />
-                                    </InertiaLink>
+                                    </Link>
                                 </div>
 
                                 <table className="table table-vcenter card-table">

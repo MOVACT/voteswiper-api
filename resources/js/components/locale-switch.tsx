@@ -1,5 +1,4 @@
-import { Page } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
+import { usePage } from '@inertiajs/react';
 import { IconLanguage } from '@tabler/icons-react';
 import cn from 'classnames';
 import React from 'react';
@@ -13,7 +12,7 @@ interface Props {
 
 export const LocaleSwitch: React.FC<Props> = ({ locales }) => {
     const $dropdownEl = React.useRef<HTMLDivElement>(null);
-    const { props } = usePage<Page<GlobalProps>>();
+    const { props } = usePage<GlobalProps>();
     const [open, setOpen] = React.useState(false);
     useClickAway($dropdownEl, () => {
         setOpen(false);

@@ -2,7 +2,7 @@ import React from 'react';
 
 export const FlagWorld: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
     return (
-        <svg viewBox="0 0 28 20">
+        <svg viewBox="0 0 28 20" {...props}>
             <defs>
                 <rect id="a" x="0" y="0" width="28" height="20" rx="2" />
             </defs>

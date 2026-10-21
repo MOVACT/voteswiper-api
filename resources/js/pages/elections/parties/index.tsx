@@ -1,20 +1,17 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { IconArrowLeft, IconEye, IconPlus } from '@tabler/icons-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../../components/layout';
 import { Page } from '../../../components/page';
 import cdn from '../../../util/cdn';
 
-interface Props {
+interface Props extends GlobalProps {
     election: Election;
     parties: Party[];
 }
 
 const Parties: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
     const { election } = props;
 
     console.log(election);
@@ -24,20 +21,20 @@ const Parties: InertiaPage = () => {
             title={
                 <div>
                     <small className="fs-6 text-sm text-secondary">
-                        <InertiaLink
+                        <Link
                             href={route('admin.elections')}
                             className="d-flex"
                         >
                             <IconArrowLeft size={14} />
                             {election.name}
-                        </InertiaLink>
+                        </Link>
                     </small>
                     <div>Parties</div>
                 </div>
             }
             actions={
                 <div className="btn-list">
-                    <InertiaLink
+                    <Link
                         href={route('admin.election.parties.create', {
                             election: election.id,
                         })}
@@ -45,11 +42,11 @@ const Parties: InertiaPage = () => {
                     >
                         <IconPlus size={24} />
                         Attach new party
-                    </InertiaLink>
+                    </Link>
                 </div>
             }
         >
-            <Helmet title={`Parties for ${election.name}`} />
+            <Head title={`Parties for ${election.name}`} />
 
             <div className="row row-cards">
                 <div className="col-12">
@@ -83,27 +80,27 @@ const Parties: InertiaPage = () => {
                                                 <td>{party.name}</td>
                                                 <td>
                                                     {party.pivot.published ? (
-                                                        <span className="badge bg-success me-2">
+                                                        <span className="badge text-bg-success me-2">
                                                             Published
                                                         </span>
                                                     ) : (
-                                                        <span className="badge bg-danger me-2">
+                                                        <span className="badge text-bg-danger me-2">
                                                             Unpublished
                                                         </span>
                                                     )}
                                                     {party.pivot.playable ? (
-                                                        <span className="badge bg-success">
+                                                        <span className="badge text-bg-success">
                                                             Playable
                                                         </span>
                                                     ) : (
-                                                        <span className="badge bg-danger">
+                                                        <span className="badge text-bg-danger">
                                                             Not playable
                                                         </span>
                                                     )}
                                                 </td>
                                                 <td>
                                                     <div className="btn-list flex-nowrap">
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.parties.answers',
                                                                 {
@@ -115,7 +112,7 @@ const Parties: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Answers
-                                                            <span className="badge bg-primary ms-1">
+                                                            <span className="badge text-bg-primary ms-1">
                                                                 {
                                                                     party.pivot
                                                                         .answers_count
@@ -125,8 +122,8 @@ const Parties: InertiaPage = () => {
                                                                     election.questions_count
                                                                 }
                                                             </span>
-                                                        </InertiaLink>
-                                                        <InertiaLink
+                                                        </Link>
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.parties.edit',
                                                                 {
@@ -138,9 +135,9 @@ const Parties: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Edit
-                                                        </InertiaLink>
+                                                        </Link>
 
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.parties.show',
                                                                 {
@@ -154,7 +151,7 @@ const Parties: InertiaPage = () => {
                                                             <IconEye
                                                                 size={24}
                                                             />
-                                                        </InertiaLink>
+                                                        </Link>
                                                     </div>
                                                 </td>
                                             </tr>

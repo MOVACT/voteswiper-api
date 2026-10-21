@@ -1,9 +1,5 @@
-import { Page } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 
@@ -13,7 +9,7 @@ interface Props extends GlobalProps {
 }
 
 const ResetPassword: React.FC = () => {
-    const { props } = usePage<Page<Props>>();
+    const { props } = usePage<Props>();
 
     const [successMessage, showSuccessMessage] = React.useState<boolean>(false);
     const { data, setData, post, processing, errors } = useForm({
@@ -34,7 +30,7 @@ const ResetPassword: React.FC = () => {
 
     return (
         <div className="page page-center">
-            <Helmet title="Reset password" />
+            <Head title="Reset password" />
             <div className="container-tight py-4">
                 <form
                     className="card card-md"
@@ -50,10 +46,7 @@ const ResetPassword: React.FC = () => {
                         {successMessage && (
                             <div className="alert alert-success">
                                 Your password has been changed. You can now{' '}
-                                <InertiaLink href={route('login')}>
-                                    login
-                                </InertiaLink>
-                                .
+                                <Link href={route('login')}>login</Link>.
                             </div>
                         )}
 
