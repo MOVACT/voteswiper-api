@@ -1,8 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { useForm } from '@inertiajs/inertia-react';
+import { Head, useForm } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 
@@ -23,7 +20,7 @@ const ForgotPassword: React.FC = () => {
 
     return (
         <div className="page page-center">
-            <Helmet title="Forgot password" />
+            <Head title="Forgot password" />
             <div className="container-tight py-4">
                 <form
                     className="card card-md"

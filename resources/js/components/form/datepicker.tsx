@@ -68,7 +68,8 @@ const Datepicker: React.FC<Props> = ({
                     selected={selected}
                     disabled={disabled}
                     className={cn('form-control', error && ' is-invalid')}
-                    onChange={(date: Date) => {
+                    onChange={(date: Date | null) => {
+                        if (!date) return;
                         onChange(
                             format(
                                 convertLocalToUTCDate(date),

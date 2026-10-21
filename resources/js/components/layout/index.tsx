@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Page } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react';
 import {
     IconChartLine,
     IconDatabaseOff,
@@ -14,8 +12,8 @@ import React from 'react';
 import { route } from 'ziggy-js';
 import { LocaleSwitch } from '../locale-switch';
 
-export const Layout: React.FC = ({ children }) => {
-    const { props } = usePage<Page<GlobalProps>>();
+export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
+    const { props } = usePage<GlobalProps>();
     return (
         <>
             <header className="navbar navbar-expand-md navbar-light d-print-none">
@@ -73,7 +71,7 @@ export const Layout: React.FC = ({ children }) => {
                                             'active'
                                     )}
                                 >
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.elections')}
                                         className="nav-link"
                                     >
@@ -83,7 +81,7 @@ export const Layout: React.FC = ({ children }) => {
                                         <span className="nav-link-title">
                                             Elections
                                         </span>
-                                    </InertiaLink>
+                                    </Link>
                                 </li>
 
                                 <li
@@ -95,7 +93,7 @@ export const Layout: React.FC = ({ children }) => {
                                             'active'
                                     )}
                                 >
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.countries')}
                                         className="nav-link"
                                     >
@@ -105,7 +103,7 @@ export const Layout: React.FC = ({ children }) => {
                                         <span className="nav-link-title">
                                             Countries
                                         </span>
-                                    </InertiaLink>
+                                    </Link>
                                 </li>
 
                                 <li
@@ -117,7 +115,7 @@ export const Layout: React.FC = ({ children }) => {
                                             'active'
                                     )}
                                 >
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.parties')}
                                         className="nav-link"
                                     >
@@ -127,7 +125,7 @@ export const Layout: React.FC = ({ children }) => {
                                         <span className="nav-link-title">
                                             Parties
                                         </span>
-                                    </InertiaLink>
+                                    </Link>
                                 </li>
 
                                 <li
@@ -139,7 +137,7 @@ export const Layout: React.FC = ({ children }) => {
                                             'active'
                                     )}
                                 >
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.users')}
                                         className="nav-link"
                                     >
@@ -149,7 +147,7 @@ export const Layout: React.FC = ({ children }) => {
                                         <span className="nav-link-title">
                                             Users
                                         </span>
-                                    </InertiaLink>
+                                    </Link>
                                 </li>
 
                                 <li
@@ -161,7 +159,7 @@ export const Layout: React.FC = ({ children }) => {
                                             'active'
                                     )}
                                 >
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.statistic')}
                                         className="nav-link"
                                     >
@@ -171,11 +169,11 @@ export const Layout: React.FC = ({ children }) => {
                                         <span className="nav-link-title">
                                             Statistic
                                         </span>
-                                    </InertiaLink>
+                                    </Link>
                                 </li>
 
                                 <li className={cn('nav-item')}>
-                                    <InertiaLink
+                                    <Link
                                         href={route('admin.cache')}
                                         className="nav-link"
                                     >
@@ -185,7 +183,7 @@ export const Layout: React.FC = ({ children }) => {
                                         <span className="nav-link-title">
                                             Clear cache
                                         </span>
-                                    </InertiaLink>
+                                    </Link>
                                 </li>
                             </ul>
                             <div className="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">

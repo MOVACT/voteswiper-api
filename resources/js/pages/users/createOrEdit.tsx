@@ -1,15 +1,11 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
-interface Props {
+interface Props extends GlobalProps {
     edit_user?: {
         name: string;
         email: string;
@@ -18,7 +14,7 @@ interface Props {
 }
 
 const UserCreateOrEdit: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { data, setData, post, put, processing, errors } = useForm({
         name: props.edit_user ? props.edit_user.name : '',
@@ -44,7 +40,7 @@ const UserCreateOrEdit: InertiaPage = () => {
                     : 'Add new User'
             }
         >
-            <Helmet title={props.edit_user ? 'Edit User' : 'Create User'} />
+            <Head title={props.edit_user ? 'Edit User' : 'Create User'} />
             <form
                 onSubmit={submit}
                 action={

@@ -1,5 +1,4 @@
-import { Page as InertiaPage } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
+import { usePage } from '@inertiajs/react';
 import React from 'react';
 
 interface Props {
@@ -8,12 +7,17 @@ interface Props {
 }
 
 interface PageProps {
+    [key: string]: unknown;
     success?: string;
     error?: string;
 }
 
-export const Page: React.FC<Props> = ({ children, title, actions }) => {
-    const { props } = usePage<InertiaPage<PageProps>>();
+export const Page: React.FC<React.PropsWithChildren<Props>> = ({
+    children,
+    title,
+    actions,
+}) => {
+    const { props } = usePage<PageProps>();
     const { success, error } = props;
 
     return (

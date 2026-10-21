@@ -1,5 +1,4 @@
-import { Inertia, Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import {
     IconArrowDownCircle,
     IconArrowLeft,
@@ -8,22 +7,21 @@ import {
     IconPlus,
 } from '@tabler/icons-react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../../components/layout';
 import { Page } from '../../../components/page';
 
-interface Props {
+interface Props extends GlobalProps {
     election: ElectionWithQuestions;
 }
 
 const Questions: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
     const { election } = props;
 
     const moveUp = React.useCallback(
         (question: Question) => {
-            Inertia.post(
+            router.post(
                 route('admin.election.questions.up', {
                     election: election.id,
                     question: question.id,
@@ -35,7 +33,7 @@ const Questions: InertiaPage = () => {
 
     const moveDown = React.useCallback(
         (question: Question) => {
-            Inertia.post(
+            router.post(
                 route('admin.election.questions.down', {
                     election: election.id,
                     question: question.id,
@@ -50,20 +48,20 @@ const Questions: InertiaPage = () => {
             title={
                 <div>
                     <small className="fs-6 text-sm text-secondary">
-                        <InertiaLink
+                        <Link
                             href={route('admin.elections')}
                             className="d-flex"
                         >
                             <IconArrowLeft size={14} />
                             {election.name}
-                        </InertiaLink>
+                        </Link>
                     </small>
                     <div>Questions</div>
                 </div>
             }
             actions={
                 <div className="btn-list">
-                    <InertiaLink
+                    <Link
                         href={route('admin.election.questions.create', {
                             election: election.id,
                         })}
@@ -71,11 +69,11 @@ const Questions: InertiaPage = () => {
                     >
                         <IconPlus size={24} />
                         Add new question
-                    </InertiaLink>
+                    </Link>
                 </div>
             }
         >
-            <Helmet title={`Questions for ${election.name}`} />
+            <Head title={`Questions for ${election.name}`} />
 
             <div className="row row-cards">
                 <div className="col-12">
@@ -130,7 +128,7 @@ const Questions: InertiaPage = () => {
                                                 <td>{question.thesis}</td>
                                                 <td>
                                                     <div className="btn-list flex-nowrap">
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.questions.edit',
                                                                 {
@@ -143,9 +141,9 @@ const Questions: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Edit
-                                                        </InertiaLink>
+                                                        </Link>
 
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.election.questions.show',
                                                                 {
@@ -160,7 +158,7 @@ const Questions: InertiaPage = () => {
                                                             <IconEye
                                                                 size={24}
                                                             />
-                                                        </InertiaLink>
+                                                        </Link>
                                                     </div>
                                                 </td>
                                             </tr>

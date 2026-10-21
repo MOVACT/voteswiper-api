@@ -1,10 +1,6 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { IconArrowLeft } from '@tabler/icons-react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../../components/form/input';
 import Select from '../../../components/form/select';
@@ -21,7 +17,7 @@ interface Props extends GlobalProps {
 }
 
 const PartyCreateOrEdit: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { data, setData, post, processing, errors } = useForm({
         party_id: props.party ? props.party.id : '',
@@ -61,7 +57,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
             title={
                 <div>
                     <small className="fs-6 text-sm text-secondary">
-                        <InertiaLink
+                        <Link
                             href={route('admin.election.parties', {
                                 election: props.election.id,
                             })}
@@ -69,7 +65,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                         >
                             <IconArrowLeft size={14} />
                             {props.election.name}
-                        </InertiaLink>
+                        </Link>
                     </small>
                     {props.party ? (
                         <div>
@@ -82,7 +78,7 @@ const PartyCreateOrEdit: InertiaPage = () => {
                 </div>
             }
         >
-            <Helmet title={pageTitle} />
+            <Head title={pageTitle} />
             <form
                 onSubmit={submit}
                 encType="multipart/form-data"

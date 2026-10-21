@@ -1,11 +1,10 @@
 import cn from 'classnames';
 import React from 'react';
 
-interface Props
-    extends React.DetailedHTMLProps<
-        React.InputHTMLAttributes<HTMLInputElement>,
-        HTMLInputElement
-    > {
+interface Props extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+> {
     label: string;
     error: boolean;
     helperText?: string | React.ReactNode;

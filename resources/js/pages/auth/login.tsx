@@ -1,8 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { InertiaLink, useForm } from '@inertiajs/inertia-react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Input from '../../components/form/input';
 
@@ -19,7 +16,7 @@ const Login: React.FC = () => {
 
     return (
         <div className="page page-center">
-            <Helmet title="Login" />
+            <Head title="Login" />
             <div className="container-tight py-4">
                 <div className="text-center mb-4">
                     <h1>VoteSwiper</h1>
@@ -77,9 +74,9 @@ const Login: React.FC = () => {
                 </form>
 
                 <div className="text-center text-muted mt-3">
-                    <InertiaLink href={route('password.request')}>
+                    <Link href={route('password.request')}>
                         Forgot password?
-                    </InertiaLink>
+                    </Link>
                 </div>
             </div>
         </div>

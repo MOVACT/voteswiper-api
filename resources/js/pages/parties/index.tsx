@@ -1,19 +1,16 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { IconEye, IconPlus } from '@tabler/icons-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 import cdn from '../../util/cdn';
 
-interface Props {
+interface Props extends GlobalProps {
     parties: Party[];
 }
 
 const Parties: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
     const { parties } = props;
 
     return (
@@ -21,17 +18,17 @@ const Parties: InertiaPage = () => {
             title="All Parties"
             actions={
                 <div className="btn-list">
-                    <InertiaLink
+                    <Link
                         href={route('admin.parties.create')}
                         className="btn btn-primary d-inline-block"
                     >
                         <IconPlus size={24} />
                         Add new party
-                    </InertiaLink>
+                    </Link>
                 </div>
             }
         >
-            <Helmet title="All Parties" />
+            <Head title="All Parties" />
 
             <div className="row row-cards">
                 <div className="col-12">
@@ -68,7 +65,7 @@ const Parties: InertiaPage = () => {
                                                 <td>{party.country.name}</td>
                                                 <td>
                                                     <div className="btn-list flex-nowrap">
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.parties.edit',
                                                                 {
@@ -78,9 +75,9 @@ const Parties: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Edit
-                                                        </InertiaLink>
+                                                        </Link>
 
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.parties.show',
                                                                 {
@@ -92,7 +89,7 @@ const Parties: InertiaPage = () => {
                                                             <IconEye
                                                                 size={24}
                                                             />
-                                                        </InertiaLink>
+                                                        </Link>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -1,9 +1,5 @@
-import { Page as PageType } from '@inertiajs/inertia';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import Datepicker from '../../components/form/datepicker';
 import Input from '../../components/form/input';
@@ -21,7 +17,7 @@ interface Props extends GlobalProps {
 }
 
 const ElectionCreateOrEdit: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { data, setData, post, processing, errors } = useForm({
         country_id: props.election ? props.election.country_id : '',
@@ -61,7 +57,7 @@ const ElectionCreateOrEdit: InertiaPage = () => {
                     : 'Add new election'
             }
         >
-            <Helmet
+            <Head
                 title={props.election ? 'Edit Election' : 'Create Election'}
             />
             <form

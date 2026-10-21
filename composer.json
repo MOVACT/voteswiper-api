@@ -11,7 +11,7 @@
         "php": "^8.4",
         "api-ecosystem-for-laravel/dingo-api": "^4.8",
         "guzzlehttp/guzzle": "^7.9",
-        "inertiajs/inertia-laravel": "^2.0",
+        "inertiajs/inertia-laravel": "^3.5",
         "laravel/fortify": "^1.41",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",

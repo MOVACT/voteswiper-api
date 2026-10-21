@@ -1,12 +1,9 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
-interface Props {
+interface Props extends GlobalProps {
     elections: Election[];
     swipes: number;
     results: number;
@@ -14,11 +11,11 @@ interface Props {
 }
 
 const Statistic: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     return (
         <Page title="Statistic">
-            <Helmet title="Statistic" />
+            <Head title="Statistic" />
 
             <div className="row row-deck row-cards mb-4">
                 <div className="col-sm-6 col-lg-4">
@@ -77,14 +74,14 @@ const Statistic: InertiaPage = () => {
                     {props.elections.map((election) => {
                         return (
                             <div key={election.id} className="list-group-item">
-                                <InertiaLink
+                                <Link
                                     href={route('admin.statistic.election', {
                                         election: election.id,
                                     })}
                                     className="text-body d-block"
                                 >
                                     {election.name}
-                                </InertiaLink>
+                                </Link>
                             </div>
                         );
                     })}

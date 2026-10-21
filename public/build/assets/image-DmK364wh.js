@@ -1,0 +1,1 @@
+import{l as e,t}from"./app-CX90CI8F.js";import{t as n}from"./cdn-BX98hkC5.js";e();var r=t(),i=({file:e})=>(0,r.jsx)(`div`,{className:`mt-3`,children:(0,r.jsx)(`img`,{src:n(e.filename),alt:e.alt_text||``,className:`img-thumbnail img-fluid`,width:e.width||void 0,height:e.height||void 0})});export{i as t};

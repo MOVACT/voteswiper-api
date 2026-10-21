@@ -1,13 +1,10 @@
-import { Page as PageType } from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { IconPlus } from '@tabler/icons-react';
-import React from 'react';
-import { Helmet } from 'react-helmet';
 import { route } from 'ziggy-js';
 import { Layout } from '../../components/layout';
 import { Page } from '../../components/page';
 
-interface Props {
+interface Props extends GlobalProps {
     users: Array<{
         id: number;
         name: string;
@@ -16,7 +13,7 @@ interface Props {
 }
 
 const Users: InertiaPage = () => {
-    const { props } = usePage<PageType<Props>>();
+    const { props } = usePage<Props>();
 
     const { users } = props;
 
@@ -25,17 +22,17 @@ const Users: InertiaPage = () => {
             title="All Users"
             actions={
                 <div className="btn-list">
-                    <InertiaLink
+                    <Link
                         href={route('admin.users.create')}
                         className="btn btn-primary d-inline-block"
                     >
                         <IconPlus size={24} />
                         Add new user
-                    </InertiaLink>
+                    </Link>
                 </div>
             }
         >
-            <Helmet title="All Users" />
+            <Head title="All Users" />
 
             <div className="row row-cards">
                 <div className="col-12">
@@ -59,7 +56,7 @@ const Users: InertiaPage = () => {
                                                 <td>{user.email}</td>
                                                 <td>
                                                     <div className="btn-list flex-nowrap">
-                                                        <InertiaLink
+                                                        <Link
                                                             href={route(
                                                                 'admin.users.edit',
                                                                 {
@@ -69,7 +66,7 @@ const Users: InertiaPage = () => {
                                                             className="btn btn-white"
                                                         >
                                                             Edit
-                                                        </InertiaLink>
+                                                        </Link>
                                                     </div>
                                                 </td>
                                             </tr>

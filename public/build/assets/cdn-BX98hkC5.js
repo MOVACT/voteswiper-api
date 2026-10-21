@@ -1,0 +1,1 @@
+var e={assetsPublicUrl:`https://cdn.voteswiper.org/`},t=t=>e.assetsPublicUrl+t;export{t};

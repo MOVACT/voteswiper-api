@@ -1,11 +1,10 @@
 import cn from 'classnames';
 import React from 'react';
 
-interface Props
-    extends React.DetailedHTMLProps<
-        React.SelectHTMLAttributes<HTMLSelectElement>,
-        HTMLSelectElement
-    > {
+interface Props extends React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+> {
     label?: string;
     error: boolean;
     helperText?: boolean;
