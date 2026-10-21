@@ -85,7 +85,7 @@ class ElectionController extends Controller
             throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election was provided.');
         }
 
-        $isPreview = $request->header('API-Preview-Key', 'default') === env('API_PREVIEW_KEY');
+        $isPreview = $request->header('API-Preview-Key', 'default') === config('api.preview_key');
 
         $currentLocale = App::getLocale();
         $value = $request->input('id') ?? $request->input('slug');

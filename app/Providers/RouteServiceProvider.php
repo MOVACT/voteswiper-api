@@ -37,11 +37,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+        // Dingo keeps the API routes in its own router, which Laravel's route
+        // cache does not cover, so they have to be registered on every boot.
+        require base_path('routes/api.php');
 
+        $this->routes(function () {
             Route::prefix('admin')
                 ->middleware('web')
                 ->namespace($this->namespace)

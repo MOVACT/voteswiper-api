@@ -22,7 +22,7 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $isPreview = $request->header('API-Preview-Key', 'default') === env('API_PREVIEW_KEY');
+        $isPreview = $request->header('API-Preview-Key', 'default') === config('api.preview_key');
 
         if (!$request->input('slug') && !$request->input('id')) {
             throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('No election slug or id was provided.');
