@@ -26,8 +26,8 @@ class PartyController extends Controller
     {
         $parties = Party::orderBy('name')->with('country', 'logo');
 
-        if ($request->get('country')) {
-            $parties->where('country_id', $request->get('country'));
+        if ($request->input('country')) {
+            $parties->where('country_id', $request->input('country'));
         }
 
         return Inertia::render('parties', [
